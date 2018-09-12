@@ -46,7 +46,16 @@ const images = {
   webpack_modules_dependencies: require("../assets/images/webpack_modules_dependencies.png"),
   webpack_loaders_plugins_1: require("../assets/images/webpack_loaders_plugins_1.png"),
   loaders_plugins_example: require("../assets/images/loaders_plugin_example.png"),
-  loader_code_example: require("../assets/images/loader_code_example.png")
+  loader_code_example: require("../assets/images/loader_code_example.png"),
+  plugin_code_example: require("../assets/images/plugin_code_example.png"),
+  plugin_code_example_2: require("../assets/images/plugin_code_example_2.png"),
+  ast_babel_example: require("../assets/images/ast_babel_example.png"),
+  ast_example2: require("../assets/images/ast_code_example2.png"),
+  django_logo: require("../assets/images/django_logo.png"),
+  webpack_cors_errors: require("../assets/images/webpack_cors_errors.png"),
+  static_tag_code: require("../assets/images/static_tag_code.png"),
+  modulos_repetidos: require("../assets/images/modulos_repetidos.png"),
+  bundle_analyzer_example: require("../assets/images/bundle_analyzer_example.png")
 };
 
 export default class Presentation extends React.Component {
@@ -151,7 +160,7 @@ export default class Presentation extends React.Component {
         {/* 11 */}
         <Slide>
           <Heading margin="0 auto 50px auto" size={5} textColor="white">
-            Javascript modules
+            Webpack
           </Heading>
           <Image src={images.webpack_modules_dependencies} />
         </Slide>
@@ -179,11 +188,152 @@ export default class Presentation extends React.Component {
         </Slide>
         {/* 15 */}
         <Slide>
-          <Heading margin="0 auto 50px auto" size={5} textColor="white">
+          <Heading margin="0 auto 32px auto" size={5} textColor="white">
             Loaders example
           </Heading>
           <Text textSize="24px" textColor="white">Función que recibe el source code</Text>
           <Image src={images.loader_code_example} />
+          {/* <Text textColor="white" textSize={16}>https://medium.com/netscape/my-first-time-writing-a-webpack-loader-bf92d42fff57</Text> */}
+        </Slide>
+        {/* 16 */}
+        <Slide>
+          <Heading margin="0 auto 24px auto" size={5} textColor="white">
+            Plugin example
+          </Heading>
+          <Text textSize="24px" textColor="white">Apply recibe una instancia del compilador de webpack</Text>
+          <Image height={600} src={images.plugin_code_example} />
+          {/* <Text textColor="white" textSize={16}>https://medium.com/netscape/my-first-time-writing-a-webpack-loader-bf92d42fff57</Text> */}
+        </Slide>
+        {/* 16.5 */}
+        <Slide>
+          <Heading margin="0 auto 24px auto" size={5} textColor="white">
+            Plugin example: Notifier
+          </Heading>
+          <Image height={600} src={images.plugin_code_example_2} />
+          {/* <Text textColor="white" textSize={16}>https://medium.com/netscape/my-first-time-writing-a-webpack-loader-bf92d42fff57</Text> */}
+        </Slide>
+        {/* 17 */}
+        <Slide>
+          <Heading margin="0 auto 24px auto" size={5} textColor="white">
+            AST && BABEL plugins
+          </Heading>
+          <Text textSize="24px" textColor="white">
+            AST: Estructura de datos que usan los compiladores.
+          </Text>
+          <Text textSize="24px" textColor="white">
+            AST: Le informan al interpreter que es lo que está pasando en el código.
+          </Text>
+          {/* <Text textSize="24px" textColor="white">Apply que recibe una instancia del compilador de webpack</Text> */}
+          <Image height={500} src={images.ast_babel_example} />
+          {/* <Text textColor="white" textSize={16}>https://medium.com/netscape/my-first-time-writing-a-webpack-loader-bf92d42fff57</Text> */}
+        </Slide>
+        {/* 18 */}
+        <Slide bgColor="white">
+          <CodePane
+            textSize={28}
+            source={`                     var a = 3;
+                     a + 5`
+            }
+            lang="javascript"
+          />
+          <Image height={500} src={images.ast_example2} />
+        </Slide>
+        {/* 18.3 */}
+        <Slide>
+          <Heading margin="0 auto 50px auto" size={5} textColor="white">
+            En resumen...
+          </Heading>
+          <Image src={images.webpack_modules_dependencies} />
+        </Slide>
+        {/* 18.5 */}
+        <Slide>
+          {/* <Image height={200} src={images.webpackLogo} /> */}
+          <Text textSize="120px">🏃</Text>
+          <Heading size={5} textColor="white">
+            Regresemos a crehana
+          </Heading>
+        </Slide>
+        {/* 19 */}
+        <Slide>
+          <Heading margin="0 auto 24px auto" size={5} textColor="white">
+            1º Meta
+          </Heading>
+          <Text textSize={32} textColor="white" margin="0 auto 24px auto">HOT MODULE REPLACEMENT</Text>
+          <div style={{ display: "flex" }}>
+            <Image height={100} src={images.django_logo} />
+            <Image height={100} src={images.webpackLogo} />
+          </div>
+        </Slide>
+        {/* 20 */}
+        <Slide>
+          <Heading margin="0 auto 24px auto" size={5} textColor="white">
+            1º Error:
+          </Heading>
+          <Text textSize={32} textColor="white" margin="0 auto 24px auto">CORS 😟</Text>
+          <CodePane
+            textSize={22}
+            source={`
+<script src="http://localhost:9000/js/CourseDetail.min.js"></script>
+            `}
+            lang="javascript"
+          />
+          <Image height={400} src={images.webpack_cors_errors} />
+        </Slide>
+        {/* 21 */}
+        <CodeSlide
+          code={require("raw-loader!../assets/code/devServer.code")}
+          lang="js"
+          textSize={24}
+          ranges={[
+            { loc: [0, 22], title: " webpack-dev-server configuration" },
+            { loc: [9, 15], note: "Habilitar los cors en el dev server" },
+            { loc: [1, 3], note: "Especificar un public path" }
+          ]}
+        />
+        {/* 22 */}
+        <Slide>
+          <Heading textSize={30} margin="0 auto 32px auto">Automatizar el cambio de urls con un template tag</Heading>
+          <Image src={images.static_tag_code} />
+        </Slide>
+        {/* 23 */}
+        <Slide>
+          <Heading margin="0 auto 24px auto" size={5} textColor="white">
+            2º Meta
+          </Heading>
+          <Text textSize={28} textColor="white" margin="0 auto 24px auto">Acelerar el tiempo de compilación/re-compilación</Text>
+          <Text textSize={32} textColor="white" margin="0 auto 24px auto">Dll plugin vs Commons chunk plugin</Text>
+          <Text textSize="120px">🤔</Text>
+        </Slide>
+        {/* 24 */}
+        <Slide>
+          <Image src={images.modulos_repetidos} />
+        </Slide>
+        {/* 25 */}
+        <Slide>
+          <Image src={images.bundle_analyzer_example} />
+        </Slide>
+        {/* 26 */}
+        <CodeSlide
+          code={`new webpack.optimize.CommonsChunkPlugin({
+  // async: true,
+  children: true,
+  minChunks: 6,
+  // minChunks: infinity
+})`}
+          ranges={[
+            { loc: [0, 6], title: "CommonsChunkPlugin Config" }
+          ]}
+          lang="js"
+        />
+        {/* 27 */}
+        <Slide>
+          <Heading textSize={50} margin="0 auto 32px auto">Common chunk plugin</Heading>
+          <Text textAlign="left" textSize={40} textColor="white">Desventajas:</Text>
+          <List textColor="white">
+            <ListItem margin="10px auto" textSize={28}>No acelera el tiempo de compilación.</ListItem>
+            <ListItem margin="10px auto" textSize={28}>Dificil de manejar en proyectos grandes.</ListItem>
+            <ListItem margin="10px auto" textSize={28}>En un futuro será deprecado por webpack</ListItem>
+          </List>
         </Slide>
         {/* 3123123 */}
         <CodeSlide
