@@ -1,0 +1,22 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const DLL_CONFIG = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: style.TEST,
+        include: [style.MAIN_MENU_PATH],
+        use: [
+          MiniCssExtractPlugin.loader,
+          ...style.cleanLoaders,
+        ],
+      },
+    ],
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'MainMenu.min.css',
+    }),
+  ],
+}

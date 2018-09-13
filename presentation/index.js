@@ -55,7 +55,12 @@ const images = {
   webpack_cors_errors: require("../assets/images/webpack_cors_errors.png"),
   static_tag_code: require("../assets/images/static_tag_code.png"),
   modulos_repetidos: require("../assets/images/modulos_repetidos.png"),
-  bundle_analyzer_example: require("../assets/images/bundle_analyzer_example.png")
+  bundle_analyzer_example: require("../assets/images/bundle_analyzer_example.png"),
+  common_chunk_final: require("../assets/images/common_chunk_final.jpg"),
+  crehana_vendor_dll: require("../assets/images/crehana_vendor_dll.png"),
+  dll_json: require("../assets/images/dll_json.png"),
+  css_modules: require("../assets/images/css_modules.png"),
+  css_modules_config: require("../assets/images/css_modules_config.png")
 };
 
 export default class Presentation extends React.Component {
@@ -312,6 +317,10 @@ export default class Presentation extends React.Component {
         <Slide>
           <Image src={images.bundle_analyzer_example} />
         </Slide>
+        {/* 25.5 */}
+        <Slide>
+          <Image src={images.common_chunk_final} />
+        </Slide>
         {/* 26 */}
         <CodeSlide
           code={`new webpack.optimize.CommonsChunkPlugin({
@@ -331,12 +340,149 @@ export default class Presentation extends React.Component {
           <Text textAlign="left" textSize={40} textColor="white">Desventajas:</Text>
           <List textColor="white">
             <ListItem margin="10px auto" textSize={28}>No acelera el tiempo de compilación.</ListItem>
-            <ListItem margin="10px auto" textSize={28}>Dificil de manejar en proyectos grandes.</ListItem>
+            <ListItem margin="10px auto" textSize={28}>Difícil de manejar en proyectos grandes.</ListItem>
             <ListItem margin="10px auto" textSize={28}>En un futuro será deprecado por webpack</ListItem>
           </List>
         </Slide>
-        {/* 3123123 */}
+        {/* 28 */}
+        <Slide>
+          <Heading margin="0 auto 24px auto" size={5} textColor="white">
+            Dll plugin
+          </Heading>
+          <Text textAlign="left" textSize={40} textColor="white">Ventajas:</Text>
+          <List textColor="white">
+            <ListItem margin="10px auto" textSize={28}>Acelera de forma drástica tiempo de compilación.</ListItem>
+            <ListItem margin="10px auto" textSize={28}>Ayuda tener un mejor manejo del cache</ListItem>
+          </List>
+          <Text textAlign="left" textSize={40} margin="80px auto 0 auto" textColor="white">Desventajas:</Text>
+          <List textColor="white">
+            <ListItem margin="10px auto" textSize={28}>Necesita una configuración extra.</ListItem>
+          </List>
+        </Slide>
+        {/* 29 */}
         <CodeSlide
+          code={require("raw-loader!../assets/code/dll.code")}
+          ranges={[
+            { loc: [0, 32], title: "Dll plugin configuration" },
+            { loc: [1, 10], note: "Entries" },
+            { loc: [10, 18] },
+            { loc: [21, 28] }
+          ]}
+          lang="js"
+        />
+        {/* 30 */}
+        <Slide>
+          <Image height={600} src={images.dll_json} />
+        </Slide>
+        {/* 30.5 */}
+        <CodeSlide
+          code={require("raw-loader!../assets/code/dll_reference.code")}
+          textSize={24}
+          ranges={[
+            { loc: [0, 55], title: "Dll Reference plugin configuration" },
+            { loc: [44, 48] }
+          ]}
+          lang="js"
+        />
+        {/* 31 */}
+        <Slide>
+          <Image src={images.crehana_vendor_dll} />
+        </Slide>
+        {/* 32 */}
+        <Slide>
+          <Heading margin="0 auto 24px auto" size={5} textColor="white">
+            3º Meta
+          </Heading>
+          <Text textSize={28} textColor="white" margin="0 auto 0 auto">Implementar css modules junto al extract-text-plugin</Text>
+          <div style={{ display: "flex" }}>
+            <Image height={500} src={images.css_modules} />
+          </div>
+        </Slide>
+        {/* 33 */}
+        <Slide>
+          <Image height={600} src={images.css_modules_config} />
+        </Slide>
+        {/* 34 */}
+        <CodeSlide
+          textSize={24}
+          code={require("raw-loader!../assets/code/style_base.code")}
+          ranges={[
+            { loc: [0, 30], title: "Style loader, base configuration" },
+            { loc: [3, 21] },
+            { loc: [22, 30] }
+          ]}
+          lang="js"
+        />
+        {/* 35 */}
+        <CodeSlide
+          textSize={24}
+          code={require("raw-loader!../assets/code/style_dll.code")}
+          ranges={[
+            { loc: [0, 30], title: "Style loader, dll configuration" },
+            { loc: [4, 21] }
+          ]}
+          lang="js"
+        />
+        {/* 36 */}
+        <CodeSlide
+          textSize={24}
+          code={require("raw-loader!../assets/code/style_shared.code")}
+          ranges={[
+            { loc: [0, 31], title: "Style loader, prod/dev configuration" },
+            { loc: [13, 30] }
+          ]}
+          lang="js"
+        />
+        {/* 37 */}
+        <CodeSlide
+          textSize={19}
+          lang="js"
+          code="import '!style-loader!css-loader!sass-loader!react-select/dist/react-select.css';"
+          ranges={[
+            { loc: [0, 1], title: "Corregir los imports directos de los css/sass" }
+          ]}
+        />
+        {/* 38 */}
+        <Slide>
+          <Text textAlign="left" textSize={40} textColor="white">Metas cumplidas:</Text>
+          <List textColor="white">
+            <ListItem margin="10px auto" textSize={24}>Hot module replacement</ListItem>
+            <ListItem margin="10px auto" textSize={24}>Rebuilds rápidos gracias al dll plugin</ListItem>
+            <ListItem margin="10px auto" textSize={24}>Una mejor estructura de los archivos/carpetas de webpack</ListItem>
+          </List>
+          <Text textSize="162px">
+            <p style={{ lineHeight: "100px", transform: "rotateY(180deg)", margin: "0" }}>
+              🏎
+            </p>
+          </Text>
+        </Slide>
+        {/* 39*/}
+        <Slide>
+          <Text textAlign="left" textSize={40} textColor="white">Cosas por mejorar</Text>
+          <List textColor="white">
+            <ListItem margin="10px auto" textSize={24}>No más memory leaks</ListItem>
+            <ListItem margin="10px auto" textSize={24}>HMRL funcional</ListItem>
+            <ListItem margin="10px auto" textSize={24}>Abstraer la lógica de archivos/folders que tiene webpack</ListItem>
+            <ListItem margin="10px auto" textSize={24}>Rehacer/Refactorizar los loaders(css loaders)</ListItem>
+            <ListItem margin="10px auto" textSize={24}>Acelerar aún más el tiempo de construcción de webpack</ListItem>
+          </List>
+        </Slide>
+        {/* 40 */}
+        <Slide>
+          <Text textColor="white" textSize="32px">
+            ¿Qué sigue?
+          </Text>
+          <Text textSize="120px">🤔</Text>
+          <List textColor="white">
+            <ListItem margin="10px auto" textSize={24}>crehana-scripts</ListItem>
+            <ListItem margin="10px auto" textSize={24}>Hacer que los loaders procesen los archivos de forma paralela</ListItem>
+            <ListItem margin="10px auto" textSize={24}>SUPER-MEGA-HYPER AGRESSIVE CACHE (DB?)</ListItem>
+            <ListItem margin="10px auto" textSize={24}>Encontrar una forma de compartir los dlls en las diferentes apps de crehana</ListItem>
+            <ListItem margin="10px auto" textSize={24}>Crear un bot de slack qué nos avise cuando la construcción ha terminado y nos diga cuantos kb +/- los archivos (custom plugin?)</ListItem>
+          </List>
+        </Slide>
+        {/* 3123123 */}
+        {/* <CodeSlide
           transition={[]}
           bgColor="codeBg"
           textSize={24}
@@ -350,7 +496,7 @@ export default class Presentation extends React.Component {
             { loc: [2, 3] },
             { loc: [8, 10] }
           ]}
-        />
+        /> */}
       </Deck>
     );
   }

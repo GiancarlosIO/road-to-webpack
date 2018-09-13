@@ -1,0 +1,31 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const BASE_CONFIG = require('./base');
+
+module.exports = merge(BASE_CONFIG, {
+  entry: entries,
+  output: {
+    path: path.join(__dirname, '../../../static/js/'),
+    publicPath: productionMode ? `${STATIC_URL}js/` : devServer.publicPath,
+    filename: '[name].min.js',
+    chunkFilename: `[name].${productionMode ? '[hash].' : ''}chunk.js`,
+  },
+
+  module: {
+    rules: [
+      {
+        test: style.TEST,
+        use: productionMode ? [
+          MiniCssExtractPlugin.loader,
+          ...style.cleanLoaders,
+        ] : style.defaultLoaders,
+      },
+    ],
+  },
+
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].min.css',
+    }),
+  ],
+});

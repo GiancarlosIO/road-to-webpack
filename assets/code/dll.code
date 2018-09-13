@@ -1,0 +1,31 @@
+const DLL_CONFIG = {
+  entry: {
+    vendor: [
+      '@crehana/aegis',
+      'react',
+      'react-dom',
+      'react-apollo',
+      'apollo-client',
+    ],
+  },
+  output: {
+    path: path.join(__dirname, '../../../static/js'),
+    filename: '[name].dll.js',
+    publicPath: `${STATIC_URL}js/`,
+    chunkFilename: '[name].[chunkhash:8].chunk.min.js',
+    // this field should has the same name with name option in dll plugin
+    library: '[name]_dll',
+  },
+  module: {
+    rules: [ //... ],
+  },
+  plugins: [
+    new webpack.DllPlugin({
+      context: __dirname,
+      path: path.join(__dirname, '../../jsx/dll/', '[name]-manifest.json'),
+      name: '[name]_dll',
+    }),
+  ],
+};
+
+module.exports = DLL_CONFIG;

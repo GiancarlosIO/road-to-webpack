@@ -1,0 +1,30 @@
+const TEST = /\.(sa|sc|c)ss$/;
+const MAIN_MENU_PATH = resolve(__dirname, '../../jsx/MainMenu/');
+
+const cleanLoaders = [
+  {
+    loader: 'css-loader',
+    options: {
+      minimize: productionMode ? { preset: 'default' } : false,
+      modules: true,
+      localIdentName: '[name]__[local]',
+      importLoaders: 2,
+    },
+  },
+  {
+    loader: 'postcss-loader',
+    options: {
+      config: { path: resolve(__dirname, '../../../../postcss.config.js') },
+    },
+  },
+  'sass-loader',
+];
+
+const defaultLoaders = ['style-loader'].concat(cleanLoaders);
+
+module.exports = {
+  TEST,
+  MAIN_MENU_PATH,
+  cleanLoaders,
+  defaultLoaders,
+};
