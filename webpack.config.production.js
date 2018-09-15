@@ -2,6 +2,7 @@
 
 var path = require("path");
 var webpack = require("webpack");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: [
@@ -9,11 +10,14 @@ module.exports = {
     "./index"
   ],
   output: {
-    path: path.join(__dirname, "dist"),
+    path: path.join(__dirname, "docs"),
     filename: "bundle.js",
-    publicPath: "/dist/"
+    publicPath: "/"
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: 'assets/index.html'
+    }),
     new webpack.DefinePlugin({
       "process.env": {
         "NODE_ENV": JSON.stringify("production")
